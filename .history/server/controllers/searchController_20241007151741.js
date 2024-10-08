@@ -1,1 +1,0 @@
-const searchControllerasync(req,res)

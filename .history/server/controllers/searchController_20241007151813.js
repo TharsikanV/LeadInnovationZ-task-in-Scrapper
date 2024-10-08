@@ -1,1 +1,0 @@
-asyn searchController=(req,res)

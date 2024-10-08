@@ -1,1 +1,0 @@
-const searchController=>async(req,res)

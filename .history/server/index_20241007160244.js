@@ -1,4 +1,0 @@
-const app=require('./app');
-app.listen(process.env., ()=>{
-    console.log(`Server is running on port ${port}`);
-});
