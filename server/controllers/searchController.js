@@ -11,7 +11,7 @@ async function searchController(req, res) {
 
     try {
         const data = await puppeteerScraper(keyword);
-        res.json(data);
+        res.status(200).json(data);
 
     }
     catch (error) {
@@ -26,12 +26,10 @@ async function puppeteerScraper(keyword) {
     try {
         const url = `https://ikman.lk/en/ads?query=${keyword}&page=1`;
         await page.goto(url, {
-            // timeout: 60000,
             waitUntil: 'networkidle0'
         });
 
         const productData = await page.evaluate((url) => {
-            // const product=Array.from(document.querySelectorAll('.card-link--3ssYv'))
             const data = Array.from(document.querySelectorAll('.card-link--3ssYv.gtm-ad-item')).map((product) => (
                     {
                         
@@ -39,7 +37,6 @@ async function puppeteerScraper(keyword) {
                         price: product.querySelector('.price--3SnqI')?.innerText,
                         location: product.querySelector('.description--2-ez3')?.innerText,
                         listing_URL: product?.href,
-                        // listing_URL: product.getAttribute('href'),
                         date_posted: product.querySelector('.updated-time--1DbCk')?.innerText || 'Not found'
                     }
                 ))
